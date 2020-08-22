@@ -1,1 +1,5 @@
+# NPM
 node_modules
+
+# IDE folders and files
+.vscode

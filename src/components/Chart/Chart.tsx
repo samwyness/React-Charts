@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import BarVertical from './BarVertical';
-import PieChart from './PieChart';
+import BarVertical from '../BarVertical';
+import PieChart from '../PieChart';
 
 import '../css/charts.css';
 
