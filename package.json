@@ -1,0 +1,35 @@
+{
+  "name": "@swlabs/react-charts",
+  "version": "1.0.0",
+  "description": "Interactive charts components built with React.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samwyness/react-charts.git"
+  },
+  "keywords": [
+    "swlabs",
+    "react-charts"
+  ],
+  "author": "Sam Wyness",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samwyness/react-charts/issues"
+  },
+  "homepage": "https://github.com/samwyness/react-charts#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@storybook/addon-actions": "^6.0.16",
+    "@storybook/addon-essentials": "^6.0.16",
+    "@storybook/addon-links": "^6.0.16",
+    "@storybook/react": "^6.0.16",
+    "babel-loader": "^8.1.0",
+    "react-is": "^16.13.1"
+  },
+  "dependencies": {}
+}
