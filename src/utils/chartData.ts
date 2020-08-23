@@ -1,64 +1,48 @@
+import { arraySum } from './arraySum';
 import { getRandomColor } from './colors';
 
-/**
- * [arrayCompare description]
- */
-export function arrayCompare(a1: any[], a2: any[]) {
-  if (a1.length !== a2.length) {
-    return false;
-  }
+// Example chart props
+// const ChartProps = {
+//   type: 'bar-vertical',
+//   title: 'Project Tasks',
+//   valuePrefix: '$',
+//   size: 250,
+//   data: [
+//     ['Task Status', 'Tasks'],
+//     ['Open', 100, { color: colors.deep_purple_300 }],
+//     ['In Progress', 100, { color: colors.blue_300 }],
+//     ['Review', 100, { color: colors.red_300 }],
+//     ['Complete', 100, { color: colors.green_300 }],
+//   ]
+// }
 
-  let test1: string | boolean = false;
-  let test2: string | boolean = false;
+export type ValueOption = { color: string };
 
-  for (let i = 0; i < a1.length; i++) {
-    test1 = a1[i];
-    test2 = a2[i];
+export type ChartDataArray = (string | number | { color: string })[];
 
-    if (!!test1) {
-      test1 = JSON.stringify(test1);
-    }
-
-    if (!!test2) {
-      test2 = JSON.stringify(test2);
-    }
-
-    if (test1 !== test2) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-/**
- * [inArray description]
- */
-export function inArray(needle, haystack: any[]) {
-  for (let i = 0; i < haystack.length; i++) {
-    if (!!haystack[i] && arrayCompare(haystack[i], needle)) {
-      return true;
-    } else if (haystack[i] === needle) {
-      return false;
-    }
-
-    return false;
-  }
-}
-
-/**
- * [arraySum description]
- */
-export function arraySum(array: any[]) {
-  return array.reduce((total, num) => total + num);
-}
+export type ChartDataObject = {
+  itemData: {
+    title: string;
+    values: (string | number)[];
+  };
+  valueData: {
+    title: string;
+    values: (string | number)[];
+    options: ValueOption[] | [];
+  };
+};
 
 /**
  * [dataArrayToObject description]
  */
-export function dataArrayToObject(data: any[]) {
+export function dataArrayToObject(data: ChartDataArray): ChartDataObject | null {
   let titleArray;
   let dataArray;
+
+  if (data.length === 0) {
+    new Error('Data array has not items');
+    return;
+  }
 
   titleArray = data[0];
   dataArray = data.slice(1);
@@ -84,7 +68,7 @@ export function dataArrayToObject(data: any[]) {
   });
 
   if (valueData.options.length < 1) {
-    let newColor = false;
+    let newColor = '';
     let usedColors = [];
 
     valueData.values.map(() => {
@@ -94,12 +78,10 @@ export function dataArrayToObject(data: any[]) {
     });
   }
 
-  let dataObject = {
+  return {
     itemData,
     valueData,
   };
-
-  return dataObject;
 }
 
 /**
@@ -160,10 +142,7 @@ export function getCalculatedValuesFromData(dataObject) {
 /**
  * [calculatePieSlices description]
  */
-export function calculatePieSlices(
-  pieSize: number,
-  dataObject: { valueData: any }
-) {
+export function calculatePieSlices(pieSize: number, dataObject: { valueData: any }) {
   let valueData = dataObject.valueData;
   let values = valueData.values;
   let valueTotal = arraySum(values);
@@ -209,9 +188,7 @@ export function calculatePieSlices(
       arcSweep = 1;
     }
 
-    itemColor = valueData.options[index]
-      ? valueData.options[index].color
-      : null;
+    itemColor = valueData.options[index] ? valueData.options[index].color : null;
 
     slices.push({
       percentage: valueItem / valueTotal,

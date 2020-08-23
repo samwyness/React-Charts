@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
 
+import { ChartDataArray, dataArrayToObject } from '../../utils';
 import { BarVertical } from '../BarVertical';
 import { PieChart } from '../PieChart';
 
 import './Chart.scss';
 
-export type ChartProps = {
-  data: any;
-  config: any;
+export type ChartConfig = {
+  type: 'bar-vertical' | 'pie' | 'donut';
+  title: string;
+  valuePrefix?: string;
+  size?: number;
 };
 
-export const Chart = ({ data, config }: ChartProps) => {
+export interface ChartProps extends ChartConfig {
+  data: ChartDataArray;
+}
+
+export const Chart = (props: ChartProps) => {
+  const { type, title, data } = props;
   let ChartType;
 
-  switch (config.type) {
+  switch (type) {
     case 'bar-vertical':
       ChartType = BarVertical;
       break;
@@ -28,13 +36,14 @@ export const Chart = ({ data, config }: ChartProps) => {
       break;
   }
 
-  return (
-    <div className={`chart-container chart-type-${config.type}`}>
-      <div className="chart-title">
-        <strong>{config.title}</strong>
-      </div>
+  console.log(dataArrayToObject(props.data));
 
-      <ChartType data={data} config={config} />
+  return (
+    <div className={`rc-chart chart-type-${type}`}>
+      <div className="chart-title">
+        <strong>{title}</strong>
+      </div>
+      <ChartType data={data} config={props} />
     </div>
   );
 };

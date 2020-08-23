@@ -1,4 +1,4 @@
-import { inArray } from './chartData';
+import { arrayHas } from './arrayHas';
 
 export const colors = {
   dark: '#49565f',
@@ -50,10 +50,9 @@ export function getRandomColor(used_colors) {
     'deep_orange_300',
   ];
 
-  let new_color =
-    colors[color_names[Math.floor(Math.random() * color_names.length)]];
+  let new_color = colors[color_names[Math.floor(Math.random() * color_names.length)]];
 
-  if (used_colors && inArray(new_color, used_colors)) {
+  if (used_colors && arrayHas(new_color, used_colors)) {
     new_color = getRandomColor(used_colors);
   }
 

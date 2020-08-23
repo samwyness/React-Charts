@@ -1,17 +1,19 @@
 import React, { Component, useState } from 'react';
 
-import { colors } from '../../utils/colors';
+import { ChartConfig } from '../Chart/Chart';
 import {
+  colors,
   dataArrayToObject,
   getCalculatedValuesFromData,
   calculatePieSlices,
-} from '../../utils/chartData';
+  ChartDataArray,
+} from '../../utils';
 
 import './PieChart.scss';
 
 export type PieChartProps = {
-  data: any;
-  config: any;
+  data: ChartDataArray;
+  config: ChartConfig;
 };
 
 export const PieChart = ({ data, config }: PieChartProps) => {
@@ -64,8 +66,7 @@ export const PieChart = ({ data, config }: PieChartProps) => {
               'z',
             ].join(' ');
 
-            const selectedSliceClass =
-              selectedSlice === index ? 'selected' : '';
+            const selectedSliceClass = selectedSlice === index ? 'selected' : '';
 
             return (
               <path
@@ -102,15 +103,8 @@ export const PieChart = ({ data, config }: PieChartProps) => {
                     fill: colors.dark,
                   }}
                 >
-                  <tspan
-                    x="50%"
-                    y="50%"
-                    dy=""
-                    style={{ fontSize: donutFontSize }}
-                  >
-                    {selectedSlice !== -1
-                      ? valueData.values[selectedSlice]
-                      : donutValueNull}
+                  <tspan x="50%" y="50%" dy="" style={{ fontSize: donutFontSize }}>
+                    {selectedSlice !== -1 ? valueData.values[selectedSlice] : donutValueNull}
                   </tspan>
 
                   <tspan x="50%" y="50%" dy="2em">
@@ -130,11 +124,9 @@ export const PieChart = ({ data, config }: PieChartProps) => {
           </div>
 
           {itemData.values.map((itemValue, index) => {
-            const pieFraction =
-              (valueData.values[index] / calcValues.valueTotal) * 100;
+            const pieFraction = (Number(valueData.values[index]) / calcValues.valueTotal) * 100;
             const percentage = pieFraction.toFixed(1);
-            const selectedSliceClass =
-              selectedSlice === index ? 'selected' : '';
+            const selectedSliceClass = selectedSlice === index ? 'selected' : '';
 
             return (
               <div
