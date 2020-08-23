@@ -1,4 +1,3 @@
-import PieChart from './PieChart';
-import './PieChart.scss';
+import { PieChart } from './PieChart';
 
-export default PieChart;
+export { PieChart };

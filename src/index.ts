@@ -1,7 +1,3 @@
-import Chart from './components/Chart';
+import { Chart, BarVertical, PieChart } from './components';
 
-if ( process.env.NODE_ENV === 'development' ) {
-    console.log( '%cCharts started in development mode', 'color: green;' );
-}
-
-export default Chart;
+export { Chart, BarVertical, PieChart };

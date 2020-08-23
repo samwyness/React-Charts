@@ -1,4 +1,3 @@
-import BarVertical from './BarVertical';
-import './BarVertical.scss';
+import { BarVertical } from './BarVertical';
 
-export default BarVertical;
+export { BarVertical };

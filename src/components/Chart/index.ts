@@ -1,4 +1,4 @@
-import Chart from './Chart';
-import './Chart.scss';
+import { Chart } from './Chart';
+import '../../scss/style.scss';
 
-export default Chart;
+export { Chart };

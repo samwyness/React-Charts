@@ -1,6 +1,52 @@
 import { getRandomColor } from './colors';
 
 /**
+ * [arrayCompare description]
+ */
+export function arrayCompare(a1: any[], a2: any[]) {
+  if (a1.length !== a2.length) {
+    return false;
+  }
+
+  let test1: string | boolean = false;
+  let test2: string | boolean = false;
+
+  for (let i = 0; i < a1.length; i++) {
+    test1 = a1[i];
+    test2 = a2[i];
+
+    if (!!test1) {
+      test1 = JSON.stringify(test1);
+    }
+
+    if (!!test2) {
+      test2 = JSON.stringify(test2);
+    }
+
+    if (test1 !== test2) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/**
+ * [inArray description]
+ */
+export function inArray(needle, haystack: any[]) {
+  for (let i = 0; i < haystack.length; i++) {
+    if (!!haystack[i] && arrayCompare(haystack[i], needle)) {
+      return true;
+    } else if (haystack[i] === needle) {
+      return false;
+    }
+
+    return false;
+  }
+}
+
+/**
  * [arraySum description]
  */
 export function arraySum(array: any[]) {
@@ -10,11 +56,10 @@ export function arraySum(array: any[]) {
 /**
  * [dataArrayToObject description]
  */
-export function dataArrayToObject(data) {
+export function dataArrayToObject(data: any[]) {
   let titleArray;
   let dataArray;
 
-  data = data || false;
   titleArray = data[0];
   dataArray = data.slice(1);
 

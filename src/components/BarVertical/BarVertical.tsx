@@ -6,6 +6,8 @@ import {
   getCalculatedValuesFromData,
 } from '../../utils/chartData';
 
+import './BarVertical.scss';
+
 export type BarVerticalProps = {
   data: any;
   config: any;
@@ -15,27 +17,15 @@ export type BarVerticalState = {
   dataObject: any;
 };
 
-export default class BarVertical extends Component<
-  BarVerticalProps,
-  BarVerticalState
-> {
-  dataObject = dataArrayToObject(this.props.data);
+export const BarVertical = ({ data, config }: BarVerticalProps) => {
+  const dataObject = dataArrayToObject(data);
 
-  constructor(props) {
-    super(props);
-  }
-
-  renderVerticalAxis() {
-    let { config } = this.props;
-    let { dataObject } = this.state;
-
-    let value_prefix = config.value_prefix || '';
-
-    let calcValues = getCalculatedValuesFromData(dataObject);
-    let { end_value, gridlines } = calcValues;
-
-    let gridline_major_offest = gridlines.major - 1;
-    let value_pos = (end_value / gridline_major_offest / end_value) * 100;
+  const renderVerticalAxis = () => {
+    const valuePrefix = config.valuePrefix || '';
+    const calcValues = getCalculatedValuesFromData(dataObject);
+    const { endValue, gridlines } = calcValues;
+    const gridlineMajorOffest = gridlines.major - 1;
+    const valuePos = (endValue / gridlineMajorOffest / endValue) * 100;
 
     return (
       <div className="chart-vertical-axis col">
@@ -43,34 +33,30 @@ export default class BarVertical extends Component<
           <div
             key={index}
             className="chart-vertical-axis-value"
-            style={{ top: `${value_pos * index}%` }}
+            style={{ top: `${valuePos * index}%` }}
           >
-            {value_prefix +
-              Math.floor(
-                end_value - (index * end_value) / gridline_major_offest
-              )}
+            {valuePrefix +
+              Math.floor(endValue - (index * endValue) / gridlineMajorOffest)}
           </div>
         ))}
       </div>
     );
-  }
+  };
 
-  renderChartData() {
-    let { dataObject } = this.state;
-    let { item_data, value_data } = dataObject;
+  const renderChartData = () => {
+    let { itemData, valueData } = dataObject;
 
     // Items
-    let items = item_data.values;
+    let items = itemData.values;
     let item_width = 100 / items.length;
 
     // Values
-    let values = value_data.values;
+    let values = valueData.values;
     let calcValues = getCalculatedValuesFromData(dataObject);
-    let { end_value, gridlines } = calcValues;
+    let { endValue, gridlines } = calcValues;
 
-    let gridline_major_offest = gridlines.major - 1;
-    let gridline_major_pos =
-      (end_value / gridline_major_offest / end_value) * 100;
+    let gridlineMajorOffest = gridlines.major - 1;
+    let gridlineMajorPos = (endValue / gridlineMajorOffest / endValue) * 100;
 
     // TODO: Implement bar height animation
     // setTimeout( function( item, item_height, item_color ) {
@@ -87,13 +73,13 @@ export default class BarVertical extends Component<
             key={index}
             className="chartData-gridline"
             style={{
-              top: `${gridline_major_pos * index}%`,
+              top: `${gridlineMajorPos * index}%`,
               backgroundColor: colors.grey,
             }}
           ></div>
 
           // TODO: Set the last line color to dark
-          // if ( i === gridline_major_offest ) {
+          // if ( i === gridlineMajorOffest ) {
           // 	gridline.style.backgroundColor = colors.dark;
           // 	gridline.style.zIndex = '150';
           // }
@@ -101,11 +87,11 @@ export default class BarVertical extends Component<
 
         {values.map((value, index) => {
           let item_height =
-            ((values[index] - calcValues.start_value) / calcValues.remainder) *
+            ((values[index] - calcValues.startValue) / calcValues.remainder) *
             100;
           let item_color =
-            value_data.options[index] && value_data.options[index].color
-              ? value_data.options[index].color
+            valueData.options[index] && valueData.options[index].color
+              ? valueData.options[index].color
               : colors.blue_300;
 
           return (
@@ -128,17 +114,15 @@ export default class BarVertical extends Component<
         })}
       </div>
     );
-  }
+  };
 
-  renderHorizontalSpacer() {
+  const renderHorizontalSpacer = () => {
     return <div className="chart-horizontal-spacer col"></div>;
-  }
+  };
 
-  renderHorizontalAxis() {
-    let { dataObject } = this.state;
-
-    let item_data = dataObject.item_data;
-    let items = item_data.values;
+  const renderHorizontalAxis = () => {
+    let itemData = dataObject.itemData;
+    let items = itemData.values;
 
     return (
       <div className="chart-horizontal-axis col flex-row">
@@ -154,37 +138,21 @@ export default class BarVertical extends Component<
         ))}
 
         <div className="chart-horizontal-axis-title">
-          <strong>{item_data.title}</strong>
+          <strong>{itemData.title}</strong>
         </div>
       </div>
     );
-  }
+  };
 
-  render() {
-    return (
+  return (
+    <div className="flex-row">
+      {renderVerticalAxis()}
+      {renderChartData()}
+
       <div className="flex-row">
-        {
-          // Vertical axis
-          this.renderVerticalAxis()
-        }
-
-        {
-          // Chart Data
-          this.renderChartData()
-        }
-
-        <div className="flex-row">
-          {
-            // Horizontal Spacer
-            this.renderHorizontalSpacer()
-          }
-
-          {
-            // Horizontal Axis
-            this.renderHorizontalAxis()
-          }
-        </div>
+        {renderHorizontalSpacer()}
+        {renderHorizontalAxis()}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
