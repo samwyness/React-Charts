@@ -33,7 +33,8 @@ export type ChartDataObject = {
 };
 
 /**
- * [dataArrayToObject description]
+ *
+ * @param data
  */
 export function dataArrayToObject(data: ChartDataArray): ChartDataObject | null {
   let titleArray;
@@ -58,7 +59,7 @@ export function dataArrayToObject(data: ChartDataArray): ChartDataObject | null 
     options: [],
   };
 
-  dataArray.map((item, index) => {
+  dataArray.forEach((item, index) => {
     itemData.values.push(dataArray[index][0]);
     valueData.values.push(dataArray[index][1]);
 
@@ -71,7 +72,7 @@ export function dataArrayToObject(data: ChartDataArray): ChartDataObject | null 
     let newColor = '';
     let usedColors = [];
 
-    valueData.values.map(() => {
+    valueData.values.forEach(() => {
       newColor = getRandomColor(usedColors);
       valueData.options = [...valueData.options, { color: newColor }];
       usedColors = [...usedColors, newColor];
@@ -85,7 +86,8 @@ export function dataArrayToObject(data: ChartDataArray): ChartDataObject | null 
 }
 
 /**
- * [getCalculatedValuesFromData description]
+ *
+ * @param dataObject
  */
 export function getCalculatedValuesFromData(dataObject) {
   let values = dataObject.valueData.values;
@@ -140,7 +142,9 @@ export function getCalculatedValuesFromData(dataObject) {
 }
 
 /**
- * [calculatePieSlices description]
+ *
+ * @param pieSize
+ * @param dataObject
  */
 export function calculatePieSlices(pieSize: number, dataObject: { valueData: any }) {
   let valueData = dataObject.valueData;
@@ -165,7 +169,7 @@ export function calculatePieSlices(pieSize: number, dataObject: { valueData: any
   let Y = 0; // SVG Y coordinate
   let R = 0; // Rotation
 
-  values.map((valueItem: number, index: string | number) => {
+  values.forEach((valueItem: number, index: string | number) => {
     a = 360 * (valueItem / valueTotal);
     aCalc = a > 180 ? 360 - a : a;
     aRad = (aCalc * Math.PI) / 180;

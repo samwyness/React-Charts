@@ -1,5 +1,7 @@
 /**
- * [arrayCompare description]
+ *
+ * @param a1
+ * @param a2
  */
 export function arrayCompare(a1: any[], a2: any[]) {
   if (a1.length !== a2.length) {

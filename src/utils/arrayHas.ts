@@ -1,7 +1,9 @@
 import { arrayCompare } from './arrayCompare';
 
 /**
- * [arrayHas description]
+ *
+ * @param needle
+ * @param haystack
  */
 export function arrayHas(needle, haystack: any[]) {
   for (let i = 0; i < haystack.length; i++) {

@@ -29,11 +29,7 @@ module.exports = {
     'no-unused-expressions': ERROR,
     'no-unused-vars': [ERROR, { args: 'none' }],
     'no-use-before-define': OFF,
-    quotes: [
-      ERROR,
-      'single',
-      { avoidEscape: true, allowTemplateLiterals: true },
-    ],
+    quotes: [ERROR, 'single', { avoidEscape: true, allowTemplateLiterals: true }],
     'space-before-blocks': ERROR,
     'space-before-function-paren': OFF,
     'valid-typeof': [ERROR, { requireStringLiterals: true }],

@@ -4,25 +4,25 @@ export const colors = {
   dark: '#49565f',
   light: '#FFF',
   grey: '#e1e2e3',
-  light_grey: '#f6f7f9',
-  dark_grey: '#b0bec5',
+  lightGrey: '#f6f7f9',
+  darkGrey: '#b0bec5',
 
-  red_500: '#F44336',
-  red_300: '#E57373',
-  pink_500: '#E91E63',
-  pink_300: '#F06292',
-  deep_purple_500: '#673AB7',
-  deep_purple_300: '#9575CD',
-  blue_500: '#2196F3',
-  blue_300: '#64B5F6',
-  green_500: '#4CAF50',
-  green_300: '#81C784',
-  amber_500: '#FFC107',
-  amber_300: '#FFD54F',
-  orange_500: '#FF9800',
-  orange_300: '#FFB74D',
-  deep_orange_500: '#FF5722',
-  deep_orange_300: '#FF8A65',
+  red500: '#F44336',
+  red300: '#E57373',
+  pink500: '#E91E63',
+  pink300: '#F06292',
+  deepPurple500: '#673AB7',
+  deepPurple300: '#9575CD',
+  blue500: '#2196F3',
+  blue300: '#64B5F6',
+  green500: '#4CAF50',
+  green300: '#81C784',
+  amber500: '#FFC107',
+  amber300: '#FFD54F',
+  orange500: '#FF9800',
+  orange300: '#FFB74D',
+  deepOrange500: '#FF5722',
+  deepOrange300: '#FF8A65',
 };
 
 /**
@@ -30,33 +30,33 @@ export const colors = {
  * @param  {[type]} last_color [description]
  * @return {[type]}            [description]
  */
-export function getRandomColor(used_colors) {
-  let color_names = [
-    'red_500',
-    'red_300',
-    'pink_500',
-    'pink_300',
-    'deep_purple_500',
-    'deep_purple_300',
-    'blue_500',
-    'blue_300',
-    'green_500',
-    'green_300',
-    'amber_500',
-    'amber_300',
-    'orange_500',
-    'orange_300',
-    'deep_orange_500',
-    'deep_orange_300',
+export function getRandomColor(usedColors) {
+  let colorNames = [
+    'red500',
+    'red300',
+    'pink500',
+    'pink300',
+    'deepPurple500',
+    'deepPurple300',
+    'blue500',
+    'blue300',
+    'green500',
+    'green300',
+    'amber500',
+    'amber300',
+    'orange500',
+    'orange300',
+    'deepOrange500',
+    'deepOrange300',
   ];
 
-  let new_color = colors[color_names[Math.floor(Math.random() * color_names.length)]];
+  let newColor = colors[colorNames[Math.floor(Math.random() * colorNames.length)]];
 
-  if (used_colors && arrayHas(new_color, used_colors)) {
-    new_color = getRandomColor(used_colors);
+  if (usedColors && arrayHas(newColor, usedColors)) {
+    newColor = getRandomColor(usedColors);
   }
 
-  return new_color;
+  return newColor;
 }
 
 export function shadeColor(color, percent) {
@@ -72,9 +72,9 @@ export function shadeColor(color, percent) {
   G = G < 255 ? G : 255;
   B = B < 255 ? B : 255;
 
-  let RR = R.toString(16).length == 1 ? '0' + R.toString(16) : R.toString(16);
-  let GG = G.toString(16).length == 1 ? '0' + G.toString(16) : G.toString(16);
-  let BB = B.toString(16).length == 1 ? '0' + B.toString(16) : B.toString(16);
+  let RR = R.toString(16).length === 1 ? '0' + R.toString(16) : R.toString(16);
+  let GG = G.toString(16).length === 1 ? '0' + G.toString(16) : G.toString(16);
+  let BB = B.toString(16).length === 1 ? '0' + B.toString(16) : B.toString(16);
 
   return `#${RR + GG + BB}`;
 }

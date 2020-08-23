@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import { ChartDataArray, dataArrayToObject } from '../../utils';
+import { ChartDataArray } from '../../utils';
 import { BarVertical } from '../BarVertical';
 import { PieChart } from '../PieChart';
 
@@ -35,8 +35,6 @@ export const Chart = (props: ChartProps) => {
       ChartType = BarVertical;
       break;
   }
-
-  console.log(dataArrayToObject(props.data));
 
   return (
     <div className={`rc-chart chart-type-${type}`}>

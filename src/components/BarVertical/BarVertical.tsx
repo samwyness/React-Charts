@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { ChartConfig } from '../Chart/Chart';
 import {
@@ -87,7 +87,7 @@ export const BarVertical = ({ data, config }: BarVerticalProps) => {
                   }%`,
                   backgroundColor: valueData.options[index].hasOwnProperty('color')
                     ? valueData.options[index].color
-                    : colors.blue_300,
+                    : colors.blue300,
                 }}
                 data-tooltip={value}
               ></div>

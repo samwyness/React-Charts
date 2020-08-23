@@ -1,58 +1,67 @@
 /* Chart Data */
-.chart-container.chart-type-pie .chartData,
-.chart-container.chart-type-donut .chartData,
-.chart-container .chart-legend {
-  flex: 0 0 100%;
-}
+// .chart-container.chart-type-pie .chart-series,
+// .chart-container.chart-type-donut .chart-series,
+// .chart-container .chart-legend {
+//   flex: 0 0 100%;
+// }
 
-.chart-type-pie .chartData.slice-selected .pie-slice,
-.chart-type-pie .chart-legend.slice-selected .chart-legend-item,
-.chart-type-donut .chartData.slice-selected .pie-slice,
-.chart-type-donut .chart-legend.slice-selected .chart-legend-item {
+.chart-type-pie .chart-series.slice-selected .pie-slice,
+.chart-type-pie .chart-legend.slice-selected .chart-legend__item,
+.chart-type-donut .chart-series.slice-selected .pie-slice,
+.chart-type-donut .chart-legend.slice-selected .chart-legend__item {
   opacity: 0.3;
   transition: opacity 0.2s ease-in;
   cursor: pointer;
 }
-.chart-type-pie .chartData.slice-selected .pie-slice.selected,
-.chart-type-pie .chart-legend.slice-selected .chart-legend-item.selected,
-.chart-type-donut .chartData.slice-selected .pie-slice.selected,
-.chart-type-donut .chart-legend.slice-selected .chart-legend-item.selected {
+.chart-type-pie .chart-series.slice-selected .pie-slice.selected,
+.chart-type-pie .chart-legend.slice-selected .chart-legend__item.selected,
+.chart-type-donut .chart-series.slice-selected .pie-slice.selected,
+.chart-type-donut .chart-legend.slice-selected .chart-legend__item.selected {
   opacity: 1;
 }
 
-/* Chart Legend */
+.chart-series {
+  svg {
+    height: 250px;
+  }
+}
 .chart-legend {
   flex: 1 0 0;
   margin-top: 20px;
-}
-.chart-legend-box {
-  overflow: hidden;
-}
-.chart-legend-title {
-  margin-bottom: 20px;
-}
-.chart-legend-item {
-  padding: 8px;
-}
-.chart-legend-item-color {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-right: 10px;
-}
-.chart-legend-item-text {
-  display: inline-block;
-  width: calc(100% - 20px);
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-size: 14px;
-  vertical-align: top;
+
+  &__box {
+    overflow: hidden;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__item {
+    padding: 8px;
+
+    &__color {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 10px;
+    }
+
+    &__text {
+      display: inline-block;
+      width: calc(100% - 20px);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: 14px;
+      vertical-align: top;
+    }
+  }
 }
 
 @media (min-width: 768px) {
-  .chart-container.chart-type-pie .chartData,
-  .chart-container.chart-type-donut .chartData,
+  .chart-container.chart-type-pie .chart-series,
+  .chart-container.chart-type-donut .chart-series,
   .chart-container .chart-legend {
     max-width: 100%;
     flex: 0 0 250px;
