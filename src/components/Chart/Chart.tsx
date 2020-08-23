@@ -3,44 +3,49 @@ import React, { Component } from 'react';
 import BarVertical from '../BarVertical';
 import PieChart from '../PieChart';
 
-import '../css/charts.css';
+export type ChartProps = {
+  data: any;
+  config: any;
+};
 
-export default class ChartComponent extends Component {
-    constructor( props ) {
-		super( props );
+export type ChartState = {};
 
-        if ( !this.props.data ) {
-            return new Error( 'Missing props \'data\'' );
-        }
+export default class ChartComponent extends Component<ChartProps, ChartState> {
+  constructor(props) {
+    super(props);
+
+    if (!this.props.data) {
+      new Error("Missing props 'data'");
+    }
+  }
+
+  render() {
+    let { data, config } = this.props;
+    let ChartType;
+
+    switch (config.type) {
+      case 'bar-vertical':
+        ChartType = BarVertical;
+        break;
+
+      case 'pie':
+      case 'donut':
+        ChartType = PieChart;
+        break;
+
+      default:
+        ChartType = BarVertical;
+        break;
     }
 
-	render() {
-		let { data, config } = this.props;
-		let ChartType;
+    return (
+      <div className={`chart-container chart-type-${config.type}`}>
+        <div className="chart-title">
+          <strong>{config.title}</strong>
+        </div>
 
-		switch ( config.type ) {
-			case 'bar-vertical':
-				ChartType = BarVertical;
-				break;
-
-			case 'pie':
-			case 'donut':
-				ChartType = PieChart;
-				break;
-
-			default:
-				ChartType = BarVertical;
-				break;
-		}
-
-		return (
-			<div className={ `chart-container chart-type-${ config.type }` }>
-				<div className="chart-title">
-					<strong>{ config.title }</strong>
-				</div>
-
-				<ChartType data={ data } config={ config } />
-			</div>
-		);
-    }
+        <ChartType data={data} config={config} />
+      </div>
+    );
+  }
 }
